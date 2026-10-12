@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Calculator</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #0b1220;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: min(320px, 85vw);
+      padding: 24px;
+      background: #172438;
+      border: 1px solid #334155;
+      border-radius: 18px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #22d3ee;
+    }
+
+    #display {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 18px 12px;
+      margin-bottom: 14px;
+      background: #0b1220;
+      color: white;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      text-align: right;
+      font-size: 28px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    button {
+      padding: 17px 0;
+      font-size: 19px;
+      border: none;
+      border-radius: 8px;
+      background: #26374e;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3a506d;
+    }
+
+    .operator, .equals {
+      background: #0891b2;
+    }
+
+    .clear {
+      background: #be123c;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calculator">
+    <h1>Calculator</h1>
+
+    <input id="display" value="0" readonly aria-label="Calculator display">
+
+    <div class="buttons">
+      <button class="clear" data-action="clear">C</button>
+      <button data-action="delete">DEL</button>
+      <button class="operator" data-value="/">÷</button>
+      <button class="operator" data-value="*">×</button>
+
+      <button data-value="7">7</button>
+      <button data-value="8">8</button>
+      <button data-value="9">9</button>
+      <button class="operator" data-value="-">−</button>
+
+      <button data-value="4">4</button>
+      <button data-value="5">5</button>
+      <button data-value="6">6</button>
+      <button class="operator" data-value="+">+</button>
+
+      <button data-value="1">1</button>
+      <button data-value="2">2</button>
+      <button data-value="3">3</button>
+      <button class="equals" data-action="equals">=</button>
+
+      <button data-value="0">0</button>
+      <button data-value=".">.</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.querySelector("#display");
+    const buttons = document.querySelector(".buttons");
+
+    let current = "0";
+    let stored = null;
+    let operator = null;
+    let startNewNumber = false;
+
+    function updateDisplay() {
+      display.value = current;
+    }
+
+    buttons.addEventListener("click", function(event) {
+      const button = event.target.closest("button");
+      if (!button) return;
+
+      const value = button.dataset.value;
+      const action = button.dataset.action;
+
+      if (action === "clear") {
+        current = "0";
+        stored = null;
+        operator = null;
+        startNewNumber = false;
+        updateDisplay();
+        return;
+      }
+
+      if (action === "delete") {
+        if (startNewNumber) {
+          current = "0";
+          startNewNumber = false;
+        } else {
+          current = current.length > 1
+            ? current.slice(0, -1)
+            : "0";
+        }
+        updateDisplay();
+        return;
+      }
+
+      if (action === "equals") {
+        if (operator === null || stored === null) return;
+
+        const a = stored;
+        const b = Number(current);
+        let result;
+
+        if (operator === "+") result = a + b;
+        if (operator === "-") result = a - b;
+        if (operator === "*") result = a * b;
+        if (operator === "/") {
+          if (b === 0) {
+            current = "Cannot divide by zero";
+            stored = null;
+            operator = null;
+            startNewNumber = true;
+            updateDisplay();
+            return;
+          }
+          result = a / b;
+        }
+
+        current = String(Number(result.toPrecision(10)));
+        stored = null;
+        operator = null;
+        startNewNumber = true;
+        updateDisplay();
+        return;
+      }
+
+      if (["+", "-", "*", "/"].includes(value)) {
+        stored = Number(current);
+        operator = value;
+        startNewNumber = true;
+        return;
+      }
+
+      if (value !== undefined) {
+        if (startNewNumber) {
+          current = value === "." ? "0." : value;
+          startNewNumber = false;
+        } else if (value === "." && current.includes(".")) {
+          return;
+        } else if (current === "0" && value !== ".") {
+          current = value;
+        } else {
+          current += value;
+        }
+
+        updateDisplay();
+      }
+    });
+  </script>
+</body>
+</html>

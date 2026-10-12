@@ -1,0 +1,254 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: #f1f5f9;
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: #172338;
+}
+
+nav {
+  display: flex;
+  gap: 18px;
+}
+
+a {
+  color: #67e8f9;
+  text-decoration: none;
+}
+
+main {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 24px;
+}
+
+section {
+  margin-bottom: 48px;
+}
+
+article {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+button {
+  background: #67e8f9;
+  color: #101827;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #a5f3fc;
+}
+
+footer {
+  padding: 24px;
+  text-align: center;
+  color: #cbd5e1;
+}
+
+@media (max-width: 500px) {
+  header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* CURRENTLY LEARNING BADGE */
+.learning-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px;
+  padding: 8px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 30px;
+  background: #ffffff;
+  color: #444444;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.learning-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #222222;
+  box-shadow: 0 0 0 4px #eeeeee;
+}
+
+/* GITHUB LINK */
+.github-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #444444;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.github-link:hover {
+  color: #000000;
+}
+
+/* TASK MANAGER PREVIEW FIX */
+.preview-tasks {
+  width: 100%;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 9px;
+  line-height: 1.3;
+  overflow: hidden;
+}
+
+
+
+.preview-tasks span {
+  display: block;
+  padding: 3px 6px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #333333;
+  font-size: 9px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+
+
+
+.preview-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #777777;
+}
+
+ 
+.preview-label {
+  display: block;
+  width: 100%;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #777777;
+  overflow: hidden;
+}
+
+
+
+.project-preview {.preview-label
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+
+/* Final sizing fix for the Task Manager preview */
+.project-preview .preview-label {
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 1px !important;
+}
+
+.project-preview .preview-tasks,
+.project-preview .preview-tasks span,
+.project-preview .preview-score,
+.project-preview .preview-score small {
+  font-size: 9px !important;
+  line-height: 1.3 !important;
+}
+
+
+/* Keep the Task Manager preview compact */
+.project-preview .preview-label {
+  font-size: 8px !important;
+  line-height: 1.2 !important;
+  margin: 0 0 4px;
+}
+
+.project-preview .preview-tasks {
+  width: 100%;
+  max-width: 180px;
+  gap: 4px;
+}
+
+.project-preview .preview-tasks span {
+  font-size: 9px !important;
+  line-height: 1.3 !important;
+  padding: 3px 5px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* FIX: Task Manager preview sizing */
+.project-preview {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.preview-label {
+  display: block;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+
+.preview-tasks {
+  width: 100%;
+  max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.preview-tasks span {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 9px;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.preview-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 9px;
+  line-height: 1.3;
+}

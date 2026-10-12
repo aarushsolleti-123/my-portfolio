@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Weather App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #0b1220;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .weather-card {
+      width: min(380px, 100%);
+      padding: 30px;
+      text-align: center;
+      background: #172438;
+      border: 1px solid #334155;
+      border-radius: 20px;
+    }
+
+    h1 {
+      color: #22d3ee;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      background: #0b1220;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #22d3ee;
+      color: #0b1220;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a5f3fc;
+    }
+
+    #result {
+      margin-top: 25px;
+      line-height: 1.8;
+    }
+
+    .temperature {
+      font-size: 42px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="weather-card">
+    <h1>🌦️ Weather App</h1>
+    <p>Find the weather in your city.</p>
+
+    <form id="weatherForm">
+      <input
+        id="city"
+        type="text"
+        placeholder="Enter a city, e.g. London"
+        aria-label="City name"
+        required
+      >
+      <button type="submit">Check Weather</button>
+    </form>
+
+    <div id="result" aria-live="polite">
+      Your weather will appear here.
+    </div>
+  </main>
+
+  <script>
+    const form = document.querySelector("#weatherForm");
+    const cityInput = document.querySelector("#city");
+    const result = document.querySelector("#result");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const city = cityInput.value.trim();
+      if (!city) return;
+
+      result.textContent = "Looking up " + city + "...";
+
+      try {
+        const geoResponse = await fetch(
+          "https://geocoding-api.open-meteo.com/v1/search?name=" +
+          encodeURIComponent(city) +
+          "&count=1&language=en&format=json"
+        );
+
+        if (!geoResponse.ok) throw new Error("Search failed.");
+
+        const geoData = await geoResponse.json();
+        const place = geoData.results?.[0];
+
+        if (!place) {
+          result.textContent = "City not found. Check the spelling and try again.";
+          return;
+        }
+
+        const weatherResponse = await fetch(
+          "https://api.open-meteo.com/v1/forecast?latitude=" +
+          place.latitude +
+          "&longitude=" +
+          place.longitude +
+          "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph"
+        );
+
+        if (!weatherResponse.ok) throw new Error("Weather lookup failed.");
+
+        const weatherData = await weatherResponse.json();
+        const weather = weatherData.current;
+
+        const conditions = {
+          0: "Clear sky",
+          1: "Mostly clear",
+          2: "Partly cloudy",
+          3: "Overcast",
+          45: "Foggy",
+          48: "Foggy",
+          51: "Light drizzle",
+          53: "Drizzle",
+          55: "Heavy drizzle",
+          61: "Light rain",
+          63: "Rain",
+          65: "Heavy rain",
+          71: "Light snow",
+          73: "Snow",
+          75: "Heavy snow",
+          80: "Rain showers",
+          81: "Rain showers",
+          82: "Heavy rain showers",
+          95: "Thunderstorm"
+        };
+
+        result.replaceChildren();
+
+        const location = document.createElement("h2");
+        location.textContent = place.name +
+          (place.country ? ", " + place.country : "");
+
+        const temperature = document.createElement("p");
+        temperature.className = "temperature";
+        temperature.textContent =
+          Math.round(weather.temperature_2m) + "°F";
+
+        const description = document.createElement("p");
+        description.textContent =
+          conditions[weather.weather_code] || "Weather conditions unavailable";
+
+        const details = document.createElement("p");
+        details.textContent =
+          "Feels like: " + Math.round(weather.apparent_temperature) +
+          "°F\nHumidity: " + weather.relative_humidity_2m +
+          "%\nWind: " + weather.wind_speed_10m + " mph";
+
+        result.append(location, temperature, description, details);
+      } catch (error) {
+        result.textContent =
+          "Couldn't load weather. Check your internet connection and try again.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Task Manager</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 30px 20px;
+      background: #0b1220;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 550px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #172438;
+      border: 1px solid #334155;
+      border-radius: 18px;
+    }
+
+    h1 {
+      color: #22d3ee;
+      text-align: center;
+    }
+
+    .task-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      min-width: 0;
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      background: #0b1220;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 11px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #22d3ee;
+      color: #0b1220;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px;
+      background: #0b1220;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    li span {
+      flex: 1;
+    }
+
+    li.done span {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .delete {
+      background: #fb7185;
+    }
+
+    .back {
+      display: block;
+      margin-top: 25px;
+      color: #22d3ee;
+      text-align: center;
+    }
+
+    #status {
+      color: #a5f3fc;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>✅ My Task Manager</h1>
+    <p>Add a task, check it off when it's done, or delete it.</p>
+
+    <form class="task-form" id="taskForm">
+      <input id="taskInput" type="text"
+        placeholder="What do you need to do?"
+        aria-label="New task" required>
+      <button type="submit">Add</button>
+    </form>
+
+    <p id="status" aria-live="polite"></p>
+    <ul id="taskList"></ul>
+
+    <a class="back" href="index.html">← Back to Portfolio</a>
+  </main>
+
+  <script>
+    const form = document.querySelector("#taskForm");
+    const input = document.querySelector("#taskInput");
+    const list = document.querySelector("#taskList");
+    const status = document.querySelector("#status");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const taskText = input.value.trim();
+      if (!taskText) return;
+
+      const item = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.setAttribute("aria-label", "Mark task complete");
+
+      const text = document.createElement("span");
+      text.textContent = taskText;
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.className = "delete";
+      deleteButton.type = "button";
+
+      checkbox.addEventListener("change", function() {
+        item.classList.toggle("done", checkbox.checked);
+      });
+
+      deleteButton.addEventListener("click", function() {
+        item.remove();
+        status.textContent = "Task deleted.";
+      });
+
+      item.append(checkbox, text, deleteButton);
+      list.append(item);
+
+      input.value = "";
+      input.focus();
+      status.textContent = "Task added!";
+    });
+  </script>
+</body>
+</html>
