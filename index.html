@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aarush Solleti | Web Developer</title>
+  <meta name="description" content="Explore the portfolio and web development projects of Aarush Solleti.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: #ffffff;
+      color: #171717;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #eeeeee;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 3px 8px;
+      background: #171717;
+      color: #ffffff;
+      border-radius: 6px;
+      letter-spacing: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      color: #555555;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #000000;
+    }
+
+    nav .nav-contact {
+      padding: 9px 16px;
+      border: 1px solid #171717;
+      border-radius: 7px;
+      color: #171717;
+    }
+
+    nav .nav-contact:hover {
+      background: #171717;
+      color: #ffffff;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 510px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 100px 12%;
+      background:
+        radial-gradient(circle at 85% 25%, #f0f0f0 0, transparent 28%),
+        #ffffff;
+    }
+
+    .eyebrow {
+      margin-bottom: 18px;
+      color: #666666;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+      color: #777777;
+    }
+
+    .hero h2 {
+      margin-top: 20px;
+      font-size: clamp(19px, 3vw, 25px);
+      font-weight: 500;
+      color: #444444;
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin: 18px 0 28px;
+      color: #666666;
+      font-size: 16px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 5px 8px 5px 0;
+      padding: 12px 20px;
+      border: 1px solid #171717;
+      border-radius: 7px;
+      background: #171717;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: #333333;
+    }
+
+    .button-outline {
+      background: transparent;
+      color: #171717;
+    }
+
+    .button-outline:hover {
+      background: #f0f0f0;
+      color: #171717;
+    }
+
+    /* GENERAL SECTIONS */
+    section:not(.hero) {
+      padding: 80px 10%;
+      scroll-margin-top: 65px;
+    }
+
+    .section-label {
+      margin-bottom: 8px;
+      color: #777777;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    section h2 {
+      margin-bottom: 14px;
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .section-intro {
+      max-width: 650px;
+      color: #666666;
+    }
+
+    /* ABOUT */
+    .about {
+      border-top: 1px solid #eeeeee;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .about-text {
+      max-width: 750px;
+      color: #555555;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .skills span {
+      padding: 8px 14px;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      background: #f8f8f8;
+      color: #333333;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* PROJECTS */
+    .projects {
+      background: #f7f7f7;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 35px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 255px;
+      padding: 28px;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      background: #ffffff;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.07);
+    }
+
+    .emoji {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: #f1f1f1;
+      font-size: 27px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 21px;
+    }
+
+    .card p {
+      flex-grow: 1;
+      margin-bottom: 22px;
+      color: #666666;
+      font-size: 14px;
+    }
+
+    .project-link {
+      font-size: 14px;
+      font-weight: 800;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center;
+    }
+
+    .contact .section-intro {
+      margin: 0 auto 24px;
+    }
+
+    #message {
+      min-height: 28px;
+      margin-top: 12px;
+      color: #444444;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 25px 8%;
+      border-top: 1px solid #eeeeee;
+      color: #777777;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #333333;
+      font-weight: 700;
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 5%;
+      }
+
+      nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 80px 7%;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      section:not(.hero) {
+        padding: 60px 7%;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 230px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+/* Basketball Hub preview */
+.basketball-preview {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background: #111;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+.basketball-preview-top,
+.basketball-preview-main,
+.basketball-preview-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.basketball-preview-top {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+.live-indicator {
+  color: #eee;
+  letter-spacing: 1px;
+}
+
+.basketball-preview-main {
+  justify-content: flex-start;
+  margin: 22px 0;
+}
+
+.basketball-ball {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border: 1px solid #555;
+  border-radius: 12px;
+  background: #222;
+  font-size: 30px;
+}
+
+.basketball-preview-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.basketball-preview-text strong {
+  font-size: 16px;
+  color: #fff;
+}
+
+.basketball-preview-text span {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.basketball-preview-stats {
+  padding-top: 13px;
+  border-top: none;
+}
+
+.basketball-preview-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.basketball-preview-stats span {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #999;
+}
+/* Gaming Hub preview */
+.gaming-preview {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 220px;
+}
+
+
+.gaming-preview-top {
+  order: 3;
+  margin-top: 18px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+.basketball-preview-stats strong {
+  font-size: 12px;
+  color: #eee;
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="#home" aria-label="Aarush Solleti home">
+      <span>AS</span> Portfolio
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a class="nav-contact" href="#contact">Contact ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <p class="eyebrow">Aspiring Web Developer</p>
+
+      <h1>Hi, I'm Aarush <span>Solleti.</span></h1>
+
+      <h2>I enjoy turning ideas into websites.</h2>
+
+      <p>
+        I'm learning web development by building projects,
+        solving problems, and exploring new ideas.
+        Welcome to my corner of the internet!
+      </p>
+
+      <div>
+        <a class="button" href="#projects">Explore My Projects ↗</a>
+        <a class="button button-outline" href="#contact">Say Hello 👋</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <p class="section-label">A little about me</p>
+      <h2>Getting to know me.</h2>
+
+      <p class="about-text">
+        Hi! I'm Aarush Solleti. I'm a beginner web developer who enjoys
+        gaming, listening to music, playing sports, and learning to code.
+        I love building projects and discovering new things. Every project
+        helps me learn something new and improve my skills.
+      </p>
+
+      <h3 style="margin-top: 28px;">Things I'm learning</h3>
+
+      <div class="skills">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Problem Solving</span>
+        <span>Web Design</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+      <p class="section-label">What I've been building</p>
+      <h2>My Projects.</h2>
+      <p class="section-intro">
+        A collection of projects I'm building as I learn and grow
+        as a developer.
+      </p>
+
+      <div class="project-grid">
+        <article class="card">
+          <div class="emoji">🧮</div>
+          <h3>Calculator</h3>
+          <p>
+            A simple calculator for performing mathematical operations
+            with a clean, easy-to-use interface.
+          </p>
+          <a class="project-link" href="calculator.html">
+            Open Calculator ↗
+          </a>
+        </article>
+
+        <article class="card">
+          <div class="emoji">🌦️</div>
+          <h3>Weather App</h3>
+          <p>
+            A weather dashboard for exploring weather conditions
+            in different cities.
+          </p>
+          <a class="project-link" href="weather.html">
+            Open Weather App ↗
+          </a>
+        </article>
+
+        <article class="card">
+          <div class="emoji">✅</div>
+          <h3> Task Manager</h3>
+          <p>
+           Keep track of your tasks and stay organized with this simple
+            task management app.
+          </p>
+          <a class="project-link" href="tasks.html">
+            Open Task Manager ↗
+          </a>
+        </article>
+
+<article class="card">
+  <div class="project-preview basketball-preview">
+    <div class="basketball-preview-top">
+      <span>BASKETBALL HUB</span>
+      <span class="live-indicator">● SCORES &amp; GAMES</span>
+    </div>
+
+    <div class="basketball-preview-main">
+      <div class="basketball-ball">🏀</div>
+      <div class="basketball-preview-text">
+        <strong>Basketball Central</strong>
+        <span>Scores, games &amp; basketball news</span>
+      </div>
+    </div>
+
+    <div class="basketball-preview-stats">
+      <div>
+        <span>EXPLORE</span>
+        <strong>Games</strong>
+      </div>
+      <div>
+        <span>FOLLOW</span>
+        <strong>Teams</strong>
+      </div>
+      <div>
+        <span>DISCOVER</span>
+        <strong>News</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="emoji">🏀</div>
+  <h3>Basketball Hub</h3>
+  <p>
+    A basketball-themed hub for exploring scores,
+    games, and other basketball content.
+  </p>
+  <a class="project-link" href="sports.html">
+    Open Basketball Hub ↗
+  </a>
+</article>
+
+<article class="card">
+  <div class="project-preview gaming-preview">
+
+    <div class="gaming-preview-main">
+      <div class="gaming-icon">🎮</div>
+      <div class="gaming-preview-text">
+        <strong>Gaming Central</strong>
+        <span>Games, challenges &amp; discovery</span>
+      </div>
+    </div>
+
+    <div class="gaming-preview-stats">
+  <div>
+    <span>EXPLORE</span>
+    <strong>Action</strong>
+  </div>
+  <div>
+    <span>DISCOVER</span>
+    <strong>Racing</strong>
+  </div>
+  <div>
+    <span>CHALLENGE</span>
+    <strong>Puzzles</strong>
+  </div>
+</div>
+
+<div class="gaming-preview-bottom">
+</div>
+
+    <div class="gaming-preview-top">
+      
+    </div>
+
+  </div>
+
+  <div class="emoji">🎮</div>
+  <h3>Gaming Hub</h3>
+  <p>
+    Explore gaming genres, discover new games,
+    and find your next favorite adventure.
+  </p>
+  <a class="project-link" href="gaming.html">
+    Open Gaming Hub ↗
+  </a>
+</article>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <p class="section-label">Have something to say?</p>
+      <h2>Let's connect.</h2>
+
+      <p class="section-intro">
+        Thanks for checking out my portfolio! I'm always learning
+        and working on something new. Feel free to say hello.
+      </p>
+
+      <button class="button" id="helloButton" type="button">
+        Say Hello 👋
+      </button>
+
+      <a
+        class="button button-outline"
+        href="https://mail.google.com/mail/?view=cm&amp;to=aarush.solleti@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📧 Email Me
+      </a>
+
+      <p id="message" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Aarush Solleti</p>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+
+  <script>
+    const button = document.querySelector("#helloButton");
+    const message = document.querySelector("#message");
+
+    button.addEventListener("click", function () {
+      message.textContent =
+        "Thanks for visiting! I'm glad you're here. 👋";
+    });
+
+    document.querySelector("#year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
