@@ -711,18 +711,27 @@
     <a href="#home">Back to top ↑</a>
   </footer>
 
-  <script>
-    const button = document.querySelector("#helloButton");
-    const message = document.querySelector("#message");
+ html
+<script>
+  const message = document.querySelector("#message");
 
-    button.addEventListener("click", function () {
-      message.textContent =
-        "Thanks for visiting! I'm glad you're here. 👋";
-    });
+  if (message) {
+    const helloButton = document.querySelector("#helloButton");
 
-    document.querySelector("#year").textContent =
-      new Date().getFullYear();
-  </script>
-  `<script src="script.js"></script>`
+    if (helloButton) {
+      helloButton.addEventListener("click", function () {
+        message.textContent =
+          "Thanks for visiting! I'm glad you're here. 👋";
+      });
+    }
+  }
+
+  const year = document.querySelector("#year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+</script>
+
+  <script src="script.js"></script>`
 </body>
 </html>
