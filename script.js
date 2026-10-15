@@ -1,9 +1,12 @@
 
-const button = document.querySelector("#helloButton");
+const helloButton = document.querySelector("#helloButton");
 
 const message = document.querySelector("#message");
-
-if (button && message) {
+if (helloButton && message) {
+  helloButton.addEventListener("click", function () {
+    message.textContent = "Thanks for visiting my website!";
+  });
+}if (button && message) {
   button.addEventListener("click", function () {
     message.textContent = "Thanks for visiting my website!";
   });
