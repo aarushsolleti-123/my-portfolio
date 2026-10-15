@@ -252,3 +252,45 @@ footer {
   font-size: 9px;
   line-height: 1.3;
 }
+
+/* Light theme */
+body.light-theme {
+    background: #f5f5f5;
+    color: #171717;
+}
+
+body.light-theme header {
+    background: #e5e5e5;
+}
+
+body.light-theme article {
+    background: #ffffff;
+    color: #171717;
+}
+
+body.light-theme footer {
+    color: #525252;
+}
+
+/* LIGHT MODE */
+body.light-mode {
+  background: #f5f5f5;
+  color: #171717;
+}
+
+body.light-mode header {
+  background: #ffffff;
+}
+
+body.light-mode article {
+  background: #e5e5e5;
+}
+
+body.light-mode a {
+  color: #333333;
+}
+
+body.light-mode footer {
+  background: #eeeeee;
+  color: #333333;
+}
